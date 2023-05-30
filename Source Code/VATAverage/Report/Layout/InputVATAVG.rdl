@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="HQBranch_1">
+          <DataField>HQBranch_1</DataField>
+        </Field>
+        <Field Name="HQBranch_2">
+          <DataField>HQBranch_2</DataField>
+        </Field>
+        <Field Name="BranchName_2">
+          <DataField>BranchName_2</DataField>
+        </Field>
+        <Field Name="PageNo">
+          <DataField>PageNo</DataField>
+        </Field>
+        <Field Name="HeaderTxt">
+          <DataField>HeaderTxt</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_VAT_Registration_No_">
+          <DataField>CompanyInfo_VAT_Registration_No_</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Phone_No">
+          <DataField>CompanyInfo_Phone_No</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Fax_No">
+          <DataField>CompanyInfo_Fax_No</DataField>
+        </Field>
+        <Field Name="TaxNoCaption">
+          <DataField>TaxNoCaption</DataField>
+        </Field>
+        <Field Name="ForMonth">
+          <DataField>ForMonth</DataField>
+        </Field>
+        <Field Name="PrintDate">
+          <DataField>PrintDate</DataField>
+        </Field>
+        <Field Name="NoCaption">
+          <DataField>NoCaption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="InvoiceNoCaption">
+          <DataField>InvoiceNoCaption</DataField>
+        </Field>
+        <Field Name="DocumentNoCaption">
+          <DataField>DocumentNoCaption</DataField>
+        </Field>
+        <Field Name="TaxInvNoCaption">
+          <DataField>TaxInvNoCaption</DataField>
+        </Field>
+        <Field Name="BranchCaption">
+          <DataField>BranchCaption</DataField>
+        </Field>
+        <Field Name="VATBaseCaption">
+          <DataField>VATBaseCaption</DataField>
+        </Field>
+        <Field Name="VatBase7Caption">
+          <DataField>VatBase7Caption</DataField>
+        </Field>
+        <Field Name="VATAmountCaption">
+          <DataField>VATAmountCaption</DataField>
+        </Field>
+        <Field Name="TotalCaption">
+          <DataField>TotalCaption</DataField>
+        </Field>
+        <Field Name="TotalCaption2">
+          <DataField>TotalCaption2</DataField>
+        </Field>
+        <Field Name="GrandTotalCaption">
+          <DataField>GrandTotalCaption</DataField>
+        </Field>
+        <Field Name="CompanyCaption">
+          <DataField>CompanyCaption</DataField>
+        </Field>
+        <Field Name="AddessCaption">
+          <DataField>AddessCaption</DataField>
+        </Field>
+        <Field Name="BranchCaption2">
+          <DataField>BranchCaption2</DataField>
+        </Field>
+        <Field Name="BranchNoCaption">
+          <DataField>BranchNoCaption</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="TaxInvDate">
+          <DataField>TaxInvDate</DataField>
+        </Field>
+        <Field Name="InvoiceNo">
+          <DataField>InvoiceNo</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="CustVendorName">
+          <DataField>CustVendorName</DataField>
+        </Field>
+        <Field Name="VATRegisterNo">
+          <DataField>VATRegisterNo</DataField>
+        </Field>
+        <Field Name="BigBranch">
+          <DataField>BigBranch</DataField>
+        </Field>
+        <Field Name="BranchNo">
+          <DataField>BranchNo</DataField>
+        </Field>
+        <Field Name="ColumnTxt">
+          <DataField>ColumnTxt</DataField>
+        </Field>
+        <Field Name="GroupVATBase">
+          <DataField>GroupVATBase</DataField>
+        </Field>
+        <Field Name="GroupVATBaseFormat">
+          <DataField>GroupVATBaseFormat</DataField>
+        </Field>
+        <Field Name="GroupVAT7Base">
+          <DataField>GroupVAT7Base</DataField>
+        </Field>
+        <Field Name="GroupVAT7BaseFormat">
+          <DataField>GroupVAT7BaseFormat</DataField>
+        </Field>
+        <Field Name="GroupVATAmount">
+          <DataField>GroupVATAmount</DataField>
+        </Field>
+        <Field Name="GroupVATAmountFormat">
+          <DataField>GroupVATAmountFormat</DataField>
+        </Field>
+        <Field Name="GroupVATCredit">
+          <DataField>GroupVATCredit</DataField>
+        </Field>
+        <Field Name="GroupVATCreditFormat">
+          <DataField>GroupVATCreditFormat</DataField>
+        </Field>
+        <Field Name="GroupVATAmountCredit">
+          <DataField>GroupVATAmountCredit</DataField>
+        </Field>
+        <Field Name="GroupVATAmountCreditFormat">
+          <DataField>GroupVATAmountCreditFormat</DataField>
+        </Field>
+        <Field Name="GroupVATAmountPurchCr">
+          <DataField>GroupVATAmountPurchCr</DataField>
+        </Field>
+        <Field Name="GroupVATAmountPurchCrFormat">
+          <DataField>GroupVATAmountPurchCrFormat</DataField>
+        </Field>
+        <Field Name="TotalVATBase">
+          <DataField>TotalVATBase</DataField>
+        </Field>
+        <Field Name="TotalVATBaseFormat">
+          <DataField>TotalVATBaseFormat</DataField>
+        </Field>
+        <Field Name="TotalVATBase7">
+          <DataField>TotalVATBase7</DataField>
+        </Field>
+        <Field Name="TotalVATBase7Format">
+          <DataField>TotalVATBase7Format</DataField>
+        </Field>
+        <Field Name="TotalVATAmount">
+          <DataField>TotalVATAmount</DataField>
+        </Field>
+        <Field Name="TotalVATAmountFormat">
+          <DataField>TotalVATAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalVATCredit">
+          <DataField>TotalVATCredit</DataField>
+        </Field>
+        <Field Name="TotalVATCreditFormat">
+          <DataField>TotalVATCreditFormat</DataField>
+        </Field>
+        <Field Name="TotalVATAmountCredit">
+          <DataField>TotalVATAmountCredit</DataField>
+        </Field>
+        <Field Name="TotalVATAmountCreditFormat">
+          <DataField>TotalVATAmountCreditFormat</DataField>
+        </Field>
+        <Field Name="TotalVATAmountPurchCr">
+          <DataField>TotalVATAmountPurchCr</DataField>
+        </Field>
+        <Field Name="TotalVATAmountPurchCrFormat">
+          <DataField>TotalVATAmountPurchCrFormat</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="TodayTxt">
+          <DataField>TodayTxt</DataField>
+        </Field>
+        <Field Name="SubTotal">
+          <DataField>SubTotal</DataField>
+        </Field>
+        <Field Name="GroupVatBaseAmtPerPage">
+          <DataField>GroupVatBaseAmtPerPage</DataField>
+        </Field>
+        <Field Name="GroupVatBaseAmtPerPageFormat">
+          <DataField>GroupVatBaseAmtPerPageFormat</DataField>
+        </Field>
+        <Field Name="GroupVatBase7AmtPerPage">
+          <DataField>GroupVatBase7AmtPerPage</DataField>
+        </Field>
+        <Field Name="GroupVatBase7AmtPerPageFormat">
+          <DataField>GroupVatBase7AmtPerPageFormat</DataField>
+        </Field>
+        <Field Name="GroupAmountPerPage">
+          <DataField>GroupAmountPerPage</DataField>
+        </Field>
+        <Field Name="GroupAmountPerPageFormat">
+          <DataField>GroupAmountPerPageFormat</DataField>
+        </Field>
+        <Field Name="GroupVATCreditPerPage">
+          <DataField>GroupVATCreditPerPage</DataField>
+        </Field>
+        <Field Name="GroupVATCreditPerPageFormat">
+          <DataField>GroupVATCreditPerPageFormat</DataField>
+        </Field>
+        <Field Name="GroupVatBaseAmtNoVatPerPage">
+          <DataField>GroupVatBaseAmtNoVatPerPage</DataField>
+        </Field>
+        <Field Name="GroupVatBaseAmtNoVatPerPageFormat">
+          <DataField>GroupVatBaseAmtNoVatPerPageFormat</DataField>
+        </Field>
+        <Field Name="GroupVATAmountCreditPerPage">
+          <DataField>GroupVATAmountCreditPerPage</DataField>
+        </Field>
+        <Field Name="GroupVATAmountCreditPerPageFormat">
+          <DataField>GroupVATAmountCreditPerPageFormat</DataField>
+        </Field>
+        <Field Name="GroupVATAmountPurchCrPerPage">
+          <DataField>GroupVATAmountPurchCrPerPage</DataField>
+        </Field>
+        <Field Name="GroupVATAmountPurchCrPerPageFormat">
+          <DataField>GroupVATAmountPurchCrPerPageFormat</DataField>
+        </Field>
+        <Field Name="VATAmountCreditCaption">
+          <DataField>VATAmountCreditCaption</DataField>
+        </Field>
+        <Field Name="VATAmountPerCreditCaption">
+          <DataField>VATAmountPerCreditCaption</DataField>
+        </Field>
+        <Field Name="VATAmountPurchaseCaption">
+          <DataField>VATAmountPurchaseCaption</DataField>
+        </Field>
+        <Field Name="VATAmountNoCreditCaption">
+          <DataField>VATAmountNoCreditCaption</DataField>
+        </Field>
+        <Field Name="VATAmountNoPerCreditCaption">
+          <DataField>VATAmountNoPerCreditCaption</DataField>
+        </Field>
+        <Field Name="VATAmountNoPurchaseCaption">
+          <DataField>VATAmountNoPurchaseCaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,40 @@
+{
+  "id": "e2b7fda1-19f8-4199-8330-1121ce422cdf",
+  "name": "BIS_Customization",
+  "publisher": "NaviWorld (Thailand) Co., Ltd.",
+  "version": "1.0.1.0",
+  "brief": "Customization Business central BC 21.1",
+  "description": "Customization Business central BC 21.1 for Bioscience Animal Heath Public Company Limited.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "./Logo/NWTH.jpg",
+  "dependencies": [
+    {
+      "id": "8f7449b1-cb76-4599-89d6-f48a4a0338bc",
+      "name": "VAT & WHT Localization for Thailand",
+      "publisher": "NaviWorld (Thailand) Co. Ltd.",
+      "version": "20.0.0.1"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "21.0.0.0",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 59999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "target": "Cloud",
+  "runtime": "10.0",
+  "features": [
+    "NoImplicitWith"
+  ]  
+}
