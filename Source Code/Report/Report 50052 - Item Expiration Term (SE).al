@@ -133,36 +133,14 @@ report 50052 "Item Expiration Term (SE)"
         Month := DATE2DMY(Today(), 2);
         Year := DATE2DMY(Today(), 3);
 
-        case Month of
-            1:
-                Monthtext := 'มกราคม';
-            2:
-                Monthtext := 'กุมภาพันธ์';
-            3:
-                Monthtext := 'มีนาคม';
-            4:
-                Monthtext := 'เมษายน';
-            5:
-                Monthtext := 'พฤษภาคม';
-            6:
-                Monthtext := 'มิถุนายน';
-            7:
-                Monthtext := 'กรกฎาคม';
-            8:
-                Monthtext := 'สิงหาคม';
-            9:
-                Monthtext := 'กันยายน';
-            10:
-                Monthtext := 'ตุลาคม';
-            11:
-                Monthtext := 'พฤศจิกายน';
-            12:
-                Monthtext := 'ธันวาคม';
-        end;
+        PrintMonth := ThaiMonth(Month);
 
-        ReportNameG := 'สรุปรายงานสต็อกสินค้าใกล้หมดอายุ ประจำเดือน' + Monthtext + ' ' + Format(Year + 543);
-        PrintDatetext := Format(Day) + ' ' + Monthtext + ' ' + Format(Year);
+        Month := DATE2DMY(DateAsOf, 2);
 
+        TitleMonth := ThaiMonth(Month);
+
+        ReportNameG := 'สรุปรายงานสต็อกสินค้าใกล้หมดอายุ ประจำเดือน' + TitleMonth + ' ' + Format(Year + 543);
+        PrintDatetext := Format(Day) + ' ' + PrintMonth + ' ' + Format(Year);
 
         ItemLedgerEntryG.Reset();
         ItemLedgerEntryG.SetRange("Posting Date", 0D, DateAsOf);
@@ -207,6 +185,37 @@ report 50052 "Item Expiration Term (SE)"
         end;
     end;
 
+    local procedure ThaiMonth(MouthP: Integer) Monthtext: Text
+    begin
+        case MouthP of
+            1:
+                Monthtext := 'มกราคม';
+            2:
+                Monthtext := 'กุมภาพันธ์';
+            3:
+                Monthtext := 'มีนาคม';
+            4:
+                Monthtext := 'เมษายน';
+            5:
+                Monthtext := 'พฤษภาคม';
+            6:
+                Monthtext := 'มิถุนายน';
+            7:
+                Monthtext := 'กรกฎาคม';
+            8:
+                Monthtext := 'สิงหาคม';
+            9:
+                Monthtext := 'กันยายน';
+            10:
+                Monthtext := 'ตุลาคม';
+            11:
+                Monthtext := 'พฤศจิกายน';
+            12:
+                Monthtext := 'ธันวาคม';
+        end;
+        exit(Monthtext);
+    end;
+
     var
         DateAsOf: Date;
         PeriodLengthG: DateFormula;
@@ -215,11 +224,12 @@ report 50052 "Item Expiration Term (SE)"
         ItemG: Record Item;
         CompanyinfoG: Record "Company Information";
         ReportNameG: Text;
-        Monthtext: Text;
         Day: Integer;
         Month: Integer;
         Year: Integer;
         DiffDaysG: Integer;
         PrintDatetext: Text;
+        TitleMonth: Text;
+        PrintMonth: Text;
 
 }
