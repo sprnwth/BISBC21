@@ -19,15 +19,15 @@ report 50048 "Bill Slip Report"
             column(CompanyInfoAdd2; CompanyInfo."Address 2")
             {
             }
-            column(CompanyInfo_BankName; CompanyInfo."Bank Name")
+            column(CompanyInfo_BankName; BankAccountG.Name)
             {
 
             }
-            column(CompanyInfo_BankAccount; CompanyInfo."Bank Account No.")
+            column(CompanyInfo_BankAccount; BankAccountG."Bank Account No.")
             {
 
             }
-            column(CompanyInfo_BankBranch; CompanyInfo."Bank Branch No.")
+            column(CompanyInfo_BankBranch; BankAccountG."Bank Branch No.")
             {
 
             }
@@ -335,13 +335,20 @@ report 50048 "Bill Slip Report"
             area(Content)
             {
 
-                group(BillDate)
+                group(Options)
                 {
-                    Caption = 'Billing Date';
+                    Caption = 'Report Options';
                     field(BillDateG; GetBillDateG)
                     {
                         ApplicationArea = all;
                         Caption = 'Billing Date';
+                    }
+
+                    field(BankAccountCodeG; BankAccountCodeG)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Bank Account No.';
+                        TableRelation = "Bank Account";
                     }
                 }
 
@@ -423,6 +430,8 @@ report 50048 "Bill Slip Report"
         CompanyInfo.CalcFields(Picture);
         Check.InitTextVariable();
 
+        BankAccountG.get(BankAccountCodeG);
+
     end;
 
 
@@ -480,5 +489,6 @@ report 50048 "Bill Slip Report"
         BillDiscountG: Decimal;
         BillDescriptionG: Text;
         PaymentDescriptionG: Text;
-
+        BankAccountCodeG: Text;
+        BankAccountG: Record "Bank Account";
 }
