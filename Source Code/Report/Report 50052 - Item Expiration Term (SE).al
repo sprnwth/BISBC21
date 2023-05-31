@@ -42,7 +42,7 @@ report 50052 "Item Expiration Term (SE)"
             {
 
             }
-            column(Location_code; ItemLedgerEntryTemp."Location Code")
+            column(Location_code; ItemLedgerEntryTemp.Description)
             {
 
             }
@@ -176,8 +176,8 @@ report 50052 "Item Expiration Term (SE)"
                     ItemLedgerEntryTemp."Expiration Date" := ItemLedgerEntryG."Expiration Date";
                     ItemLedgerEntryTemp.Quantity := ItemLedgerEntryG.Quantity;
 
-                    // Evaluate(DiffDaysG, Format(ABS(DateAsOf - ItemLedgerEntryG."Expiration Date")));
-                    // ItemLedgerEntryTemp."Invoiced Quantity" := DiffDaysG;
+                    if LocationG.Get(ItemLedgerEntryG."Location Code") then
+                        ItemLedgerEntryTemp.Description := LocationG.Name;
 
                     ItemLedgerEntryTemp.Insert();
                 end;
@@ -231,5 +231,6 @@ report 50052 "Item Expiration Term (SE)"
         PrintDatetext: Text;
         TitleMonth: Text;
         PrintMonth: Text;
+        LocationG: Record Location;
 
 }
