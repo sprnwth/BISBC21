@@ -18,6 +18,10 @@ report 50052 "Item Expiration Term (SE)"
             {
 
             }
+            column(PrintDatetext; PrintDatetext)
+            {
+
+            }
             column(ReportNameG; ReportNameG)
             {
 
@@ -157,16 +161,17 @@ report 50052 "Item Expiration Term (SE)"
         end;
 
         ReportNameG := 'สรุปรายงานสต็อกสินค้าใกล้หมดอายุ ประจำเดือน' + Monthtext + ' ' + Format(Year + 543);
+        PrintDatetext := Format(Day) + ' ' + Monthtext + ' ' + Format(Year);
 
 
         ItemLedgerEntryG.Reset();
         ItemLedgerEntryG.SetRange("Posting Date", 0D, DateAsOf);
 
-        // if Format(PeriodLengthG) <> '' then begin
-        //     Evaluate(RevisePeriodLengthL, '-' + Format(PeriodLengthG));
-        //     ExpiraFilterDate := CalcDate(RevisePeriodLengthL, DateAsOf);
-        //     ItemLedgerEntryG.SetRange("Expiration Date",ExpiraFilterDate,DateAsOf);
-        // end;
+        if Format(PeriodLengthG) <> '' then begin
+            //Evaluate(RevisePeriodLengthL, '-' + Format(PeriodLengthG));
+            ExpiraFilterDate := CalcDate(PeriodLengthG, DateAsOf);
+            ItemLedgerEntryG.SetRange("Expiration Date", DateAsOf, ExpiraFilterDate);
+        end;
 
         ItemLedgerEntryTemp.Reset();
         IF ItemLedgerEntryTemp.IsTemporary() then
@@ -215,5 +220,6 @@ report 50052 "Item Expiration Term (SE)"
         Month: Integer;
         Year: Integer;
         DiffDaysG: Integer;
+        PrintDatetext: Text;
 
 }
