@@ -103,11 +103,7 @@ report 50001 "Sales Group Report"
 
             }
 
-
-
-
             trigger OnAfterGetRecord()
-
             begin
 
                 //Data as company++
@@ -283,5 +279,4 @@ report 50001 "Sales Group Report"
         ChainName: Record customerChain;
         Vendor: Record Vendor;
         FreeAmt: Decimal;
-
 }
