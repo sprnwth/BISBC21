@@ -6,7 +6,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "OnPrem",
-            "server": "http://app05.naviworldth.com:660/",
+            "server": "http://192.168.10.3:8080/BIS/",
             "serverInstance": "BIS",
             "authentication": "Windows",
             "startupObjectId": 22,

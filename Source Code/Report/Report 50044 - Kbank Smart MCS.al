@@ -494,10 +494,10 @@ report 50044 "Kbank Smart MCS"
         /*9*/       PadStr('', 20 - strlen(BankAccNo), '0') + BankAccNo,
         /*10*/      PadStr(DocNo, 16, ' '),
         /*11*/      PadStr('', 13, ' '), //PersonalID
-        /*12*/      PadStr(VendorBankAccountG."Branch Code.", 4, ' '),
+        /*12*/      PadStr(VendorBankAccountG."Bank Branch No.", 4, ' '),
         /*13*/      PadStr(VendorBankAccountG."Transit No.", 3, ' '),
         /*14*/      PadStr('', 255, ' '),
-        /*15*/      PadStr(CompanyTaxIdG, 10, ' '), //Old 10 Change to 10 again
+        /*15*/      PadStr('', 10, ' '), //Old 10 Change to 10 again
         /*16*/      PadStr('', 50, ' '),
         /*17*/      PadStr(Format("Gen. Journal Line"."Advice Mode"), 1, ' '),
         /*18*/      PadStr(VendorBankAccountFaxNoG, 50, ' '),
