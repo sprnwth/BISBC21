@@ -144,11 +144,12 @@ report 50052 "Item Expiration Term (SE)"
 
         ItemLedgerEntryG.Reset();
         ItemLedgerEntryG.SetRange("Posting Date", 0D, DateAsOf);
+        ItemLedgerEntryG.setfilter("Item Tracking",'<>%1',ItemLedgerEntryG."Item Tracking"::None);
 
         if Format(PeriodLengthG) <> '' then begin
             //Evaluate(RevisePeriodLengthL, '-' + Format(PeriodLengthG));
             ExpiraFilterDate := CalcDate(PeriodLengthG, DateAsOf);
-            ItemLedgerEntryG.SetRange("Expiration Date", DateAsOf, ExpiraFilterDate);
+            ItemLedgerEntryG.SetRange("Expiration Date", 0D, ExpiraFilterDate);
         end;
 
         ItemLedgerEntryTemp.Reset();
