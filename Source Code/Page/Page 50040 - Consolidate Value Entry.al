@@ -122,11 +122,23 @@ page 50040 "Consolidate Value Entry"
         If CompanyRec.FindSet() then
             repeat
                 ValueEntryG.ChangeCompany(CompanyRec.CurrentCompany);
+                ValueEntryG.SetAutoCalcFields("Shortcut Dimension 3 Code",
+                                                "Shortcut Dimension 4 Code",
+                                                "Shortcut Dimension 5 Code",
+                                                "Shortcut Dimension 6 Code",
+                                                "Shortcut Dimension 7 Code",
+                                                "Shortcut Dimension 8 Code");
                 if ValueEntryG.FindSet() then
                     repeat
                         ConsolValueEntrieG.TransferFields(ValueEntryG);
                       
                         ConsolValueEntrieG.CompanyName := CompanyRec.Name;
+                        ConsolValueEntrieG."Shortcut Dimension 3 Code" := ValueEntryG."Shortcut Dimension 3 Code";
+                        ConsolValueEntrieG."Shortcut Dimension 4 Code" := ValueEntryG."Shortcut Dimension 4 Code";
+                        ConsolValueEntrieG."Shortcut Dimension 5 Code" := ValueEntryG."Shortcut Dimension 5 Code";
+                        ConsolValueEntrieG."Shortcut Dimension 6 Code" := ValueEntryG."Shortcut Dimension 6 Code";
+                        ConsolValueEntrieG."Shortcut Dimension 7 Code" := ValueEntryG."Shortcut Dimension 7 Code";
+                        ConsolValueEntrieG."Shortcut Dimension 8 Code" := ValueEntryG."Shortcut Dimension 8 Code";
 
                         ConsolValueEntrieG.Insert();
                     until ValueEntryG.Next() = 0;

@@ -41,7 +41,7 @@ report 50001 "Sales Group Report"
             {
 
             }
-            column(InvPostingGroup; ConsolVE."Inventory Posting Group")
+            column(InvPostingGroup;GenPostingGroup)
             {
 
             }
@@ -69,10 +69,11 @@ report 50001 "Sales Group Report"
             {
 
             }
-            column(Item_Category_Code; "Item Category Code")
+            column(Item_Category_Code; ItemCategory.Description)
             {
 
             }
+           
             column(Invdate; Invdate)
             {
 
@@ -102,8 +103,21 @@ report 50001 "Sales Group Report"
             {
 
             }
+            column(ItemGoodType; Item."Goods Type")
+            {
+
+            }
+            column(Brand; Item.Brand)
+            {
+                
+            }
+            column(SalesArea;SalesArea)
+            {
+                
+            }
 
             trigger OnAfterGetRecord()
+
             begin
 
                 //Data as company++
@@ -113,11 +127,18 @@ report 50001 "Sales Group Report"
                 InvQty := 0;
                 NetQyt := 0;
                 CNAmt := 0;
+                SalesArea := '';
+
+                ItemCategory.ChangeCompany(CompanyName);
+                if not ItemCategory.get("Item Category Code") then
+                    ItemCategory.Init();
 
                 ConsolVE.Reset();
                 ConsolVE.setrange(CompanyName, CompanyName);
                 ConsolVE.setrange("Item Ledger Entry No.", "Entry No.");
                 if ConsolVE.FindSet() then begin
+                    SalesArea := ConsolVE."Shortcut Dimension 5 Code"; // Area Sales
+                    GenPostingGroup := ConsolVE."Gen. Prod. Posting Group";
                     repeat
                         SalesAmt += ConsolVE."Sales Amount (Actual)";
                         SalesPerson.ChangeCompany(CompanyName);
@@ -133,6 +154,7 @@ report 50001 "Sales Group Report"
                     until ConsolVE.Next() = 0;
                 end else
                     ConsolVE.Init();
+            
 
                 if SalesAmt = 0 then
                     CurrReport.Skip();
@@ -177,8 +199,8 @@ report 50001 "Sales Group Report"
                 end;
                 if FreeAmt <> 0 then
                     FreeQty := 0;
-
                 //FIND Free--
+
                 if "Qty. per Unit of Measure" <> 1 then begin
                     if "Qty. per Unit of Measure" <> 0 then begin
                         InvQty := InvQty / "Qty. per Unit of Measure";
@@ -240,7 +262,7 @@ report 50001 "Sales Group Report"
         layout(LayoutName)
         {
             Type = RDLC;
-            LayoutFile = './Source Code/ReportLayout/SalesGroupReport.rdl';
+            LayoutFile = './Source Code/ReportLayout/SalesGroupReport.rdlc';
         }
     }
 
@@ -279,4 +301,8 @@ report 50001 "Sales Group Report"
         ChainName: Record customerChain;
         Vendor: Record Vendor;
         FreeAmt: Decimal;
+        SalesArea : Code[20];
+        GenPostingGroup : Code[20];
+        ItemCategory : Record "Item Category";
+    
 }
