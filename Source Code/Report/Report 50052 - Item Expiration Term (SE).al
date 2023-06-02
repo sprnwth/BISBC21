@@ -1,4 +1,4 @@
-report 50052 "Item Expiration Term (SE)"
+report 50072 "Item Expiration Term (SE)"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

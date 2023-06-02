@@ -213,7 +213,10 @@ report 50044 "Kbank Smart MCS"
                                     STSWHTFormIdG := '03';
                             end;
                         PersonalIdG := VendorG."VAT Registration No.";
-                        CompanyTaxIdG := Vendorg."VAT Registration No.";
+                        If VendorG."NWTH WHT Bus. Posting Group" <> '' then
+                            CompanyTaxIdG := Vendorg."VAT Registration No."
+                        else
+                            CompanyTaxIdG := '';
                         TaxIdG := VendorG."VAT Registration No.";
 
                         TaxIdG := DelChr(TaxIdG, '=', '-');
@@ -497,7 +500,7 @@ report 50044 "Kbank Smart MCS"
         /*12*/      PadStr(VendorBankAccountG."Bank Branch No.", 4, ' '),
         /*13*/      PadStr(VendorBankAccountG."Transit No.", 3, ' '),
         /*14*/      PadStr('', 255, ' '),
-        /*15*/      PadStr('', 10, ' '), //Old 10 Change to 10 again
+        /*15*/      PadStr(CompanyTaxIdG, 10, ' '), //Old 10 Change to 10 again
         /*16*/      PadStr('', 50, ' '),
         /*17*/      PadStr(Format("Gen. Journal Line"."Advice Mode"), 1, ' '),
         /*18*/      PadStr(VendorBankAccountFaxNoG, 50, ' '),
