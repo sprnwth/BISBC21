@@ -9,7 +9,7 @@ report 50018 "BIS Dist.Credit Sales Report"
     {
         dataitem("Sales Invoice Header"; "Sales Invoice Header")
         {
-            DataItemTableView = sorting("Posting Date", "No.");
+            DataItemTableView = sorting("Posting Date") ORDER(ascending);
             RequestFilterFields = "Posting Date";
             column(SIV_No; "No.")
             {
@@ -24,6 +24,9 @@ report 50018 "BIS Dist.Credit Sales Report"
             {
             }
             column(SIV_Currency_Code; "Currency Code")
+            {
+            }
+            column(External_Document_No_; "External Document No.")
             {
             }
             column(SIV_Amount; Amount)
@@ -50,6 +53,10 @@ report 50018 "BIS Dist.Credit Sales Report"
             column(EndDate; EndDate)
             {
             }
+            column(CurrenRate; CurrenRate)
+            {
+
+            }
             dataitem("Sales Invoice Line"; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = field("No.");
@@ -63,7 +70,7 @@ report 50018 "BIS Dist.Credit Sales Report"
                 {
 
                 }
-                column(Unit_of_Measure_Code; "Unit of Measure Code")
+                column(Unit_of_Measure_Code; UnitOfMeasure.Description)
                 {
                 }
                 column(Unit_Price; "Unit Price")
@@ -89,7 +96,11 @@ report 50018 "BIS Dist.Credit Sales Report"
                         LineNo += 1;
                         LineTotal += 1;
 
-                    End;                        // Message('%1   %2   %3', LineNo, "Document No.", Description);
+                    End;
+
+                    UnitOfMeasure.Reset();
+                    UnitOfMeasure.SetRange(Code, "Unit of Measure Code");
+                    If UnitOfMeasure.FindFirst() then;                // Message('%1   %2   %3', LineNo, "Document No.", Description);
                 end;
 
             }
@@ -105,8 +116,11 @@ report 50018 "BIS Dist.Credit Sales Report"
                 myInt: Integer;
             begin
                 Clear(LineNo);
-                CalcFields(Amount, "Amount Including VAT", "Invoice Discount Amount")
-
+                CalcFields(Amount, "Amount Including VAT", "Invoice Discount Amount");
+                If "Currency Factor" <> 0 then
+                    CurrenRate := 1 / "Currency Factor"
+                Else
+                    CurrenRate := 0;
             end;
 
 
@@ -153,9 +167,11 @@ report 50018 "BIS Dist.Credit Sales Report"
     end;
 
     var
+        CurrenRate: Decimal;
         myInt: Integer;
         LineNo: Integer;
         LineTotal: Integer;
         StartDate: Date;
         EndDate: Date;
+        UnitOfMeasure: Record "Unit of Measure";
 }

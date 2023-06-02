@@ -9,7 +9,7 @@ report 50017 "BIS Dist.Credit Purch. Report"
     {
         dataitem("Purch. Inv. Header"; "Purch. Inv. Header")
         {
-            DataItemTableView = sorting("Posting Date", "No.");
+            DataItemTableView = sorting("Posting Date") ORDER(descending);
             RequestFilterFields = "Posting Date";
             column(SIV_No; "No.")
             {
@@ -56,6 +56,14 @@ report 50017 "BIS Dist.Credit Purch. Report"
             {
 
             }
+            column(Vendor_Invoice_No_; "Vendor Invoice No.")
+            {
+
+            }
+            column(CurrenRate; CurrenRate)
+            {
+
+            }
             dataitem("Purch. Inv. Line"; "Purch. Inv. Line")
             {
                 DataItemLink = "Document No." = field("No.");
@@ -70,7 +78,7 @@ report 50017 "BIS Dist.Credit Purch. Report"
                 {
 
                 }
-                column(Unit_of_Measure_Code; "Unit of Measure Code")
+                column(Unit_of_Measure_Code; UnitOfMeasure.Description)
                 {
 
                 }
@@ -93,7 +101,7 @@ report 50017 "BIS Dist.Credit Purch. Report"
                 {
 
                 }
-                
+
 
 
                 trigger OnAfterGetRecord()
@@ -104,6 +112,12 @@ report 50017 "BIS Dist.Credit Purch. Report"
                         LineNo += 1;
                         LineTotal += 1;
                     End;
+                    UnitOfMeasure.Reset();
+                    UnitOfMeasure.SetRange(Code, "Unit of Measure Code");
+                    If UnitOfMeasure.FindFirst() then;
+
+
+
                 end;
 
             }
@@ -119,7 +133,12 @@ report 50017 "BIS Dist.Credit Purch. Report"
                 myInt: Integer;
             begin
                 Clear(LineNo);
-                CalcFields(Amount, "Amount Including VAT", "Invoice Discount Amount")
+                CalcFields(Amount, "Amount Including VAT", "Invoice Discount Amount");
+                If "Currency Factor" <> 0 then
+                    CurrenRate := 1 / "Currency Factor"
+                Else
+                    CurrenRate := 0;
+
 
             end;
 
@@ -167,9 +186,11 @@ report 50017 "BIS Dist.Credit Purch. Report"
     end;
 
     var
+        CurrenRate: Decimal;
         myInt: Integer;
         LineNo: Integer;
         LineTotal: Integer;
         StartDate: Date;
         EndDate: Date;
+        UnitOfMeasure: Record "Unit of Measure";
 }
