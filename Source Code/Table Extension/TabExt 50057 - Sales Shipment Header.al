@@ -24,7 +24,7 @@ tableextension 50057 SalesShipmentHeaderExt extends "Sales Shipment Header"
         // field(50003; "Vendor No."; Text[100])
         // {
         //     FieldClass = FlowField;
-        //     CalcFormula  = lookup()
+        //     CalcFormula = lookup()
 
         // }
     }
