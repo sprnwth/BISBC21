@@ -9,7 +9,8 @@ report 50005 LetterofOrder
     {
         dataitem("Sales Header"; "Sales Header")
         {
-            RequestFilterFields = "No.";
+            RequestFilterFields = "No.", "Document Date", "Shipping Agent Code";
+
             column(No_; "No.")
             {
 

@@ -19,7 +19,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>19.37975cm</Width>
+                  <Width>19.39827cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -933,7 +933,7 @@ Cstr(Fields!RefereanceWorkdesG.Value)
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Height>1.8cm</Height>
-            <Width>19.37975cm</Width>
+            <Width>19.39827cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1653,6 +1653,19 @@ Cstr(Fields!RefereanceWorkdesG.Value)
                   </TextRuns>
                   <Style />
                 </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style>
+                        <FontFamily>tahoma</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.29586in</Top>
@@ -2066,6 +2079,46 @@ Cstr(Fields!RefereanceWorkdesG.Value)
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="Textbox12">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>***</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=First(Fields!SaleSetup_ISO.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>0.04939cm</Top>
+              <Left>2.90053cm</Left>
+              <Height>0.6cm</Height>
+              <Width>6.02133cm</Width>
+              <ZIndex>12</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
@@ -2204,6 +2257,9 @@ End Function
       <Fields>
         <Field Name="ReportCaption">
           <DataField>ReportCaption</DataField>
+        </Field>
+        <Field Name="SaleSetup_ISO">
+          <DataField>SaleSetup_ISO</DataField>
         </Field>
         <Field Name="CurrCode">
           <DataField>CurrCode</DataField>

@@ -18,6 +18,10 @@ pageextension 50034 SalesSetupBISExt extends "Sales & Receivables Setup"
                 ApplicationArea = All;
 
             }
+            field("ISO for SI"; Rec."ISO for SI")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 

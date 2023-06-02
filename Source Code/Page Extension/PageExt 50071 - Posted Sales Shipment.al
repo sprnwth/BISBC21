@@ -27,6 +27,11 @@ pageextension 50071 PostedSalesShipmentExt extends "Posted Sales Shipments"
         }
         addafter("No.")
         {
+            // field()
+            // {
+            //     ApplicationArea = All;
+
+            // }
             field("Order No."; Rec."Order No.")
             {
                 ApplicationArea = All;
