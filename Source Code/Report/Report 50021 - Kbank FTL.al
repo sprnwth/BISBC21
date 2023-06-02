@@ -13,7 +13,7 @@ report 50021 "Kbank Export FTL"
             {
                 DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
                 DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Line No.") ORDER(Ascending);
-
+                RequestFilterFields = "Document No.";
                 dataitem("NWTH Apply WHT Entry"; "NWTH Apply WHT Entry")
                 {
                     DataItemLink = "Original Document No." = FIELD("Document No.");
@@ -320,10 +320,16 @@ report 50021 "Kbank Export FTL"
                 Clear(TotalCreditTermsCountG);
                 Clear(TotalAmountG);
                 Clear(TotalWHTAmountG);
+                // GenJournalLineG.Reset;
+                // GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
+                // GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
+                // GenJournalLineG.SetRange("Journal Batch Name", Name);
+
                 GenJournalLineG.Reset;
-                GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
-                GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
-                GenJournalLineG.SetRange("Journal Batch Name", Name);
+                GenJournalLineG.CopyFilters("Gen. Journal Line");
+                // GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
+                // GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
+                // GenJournalLineG.SetRange("Journal Batch Name", Name);
                 if GenJournalLineG.FindSet then begin
                     BankAccountG.Get(GenJournalLineG."Bal. Account No."); // Kbank !
                     PostingDate := GenJournalLineG."Posting Date";

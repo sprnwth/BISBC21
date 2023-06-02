@@ -13,7 +13,7 @@ report 50044 "Kbank Smart MCS"
             {
                 DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
                 DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Line No.") ORDER(Ascending);
-
+                RequestFilterFields = "Document No.";
                 dataitem("NWTH Apply WHT Entry"; "NWTH Apply WHT Entry")
                 {
                     DataItemLink = "Original Document No." = FIELD("Document No."), "Bill-to/Pay-to No." = FIELD("Account No.");
@@ -288,9 +288,10 @@ report 50044 "Kbank Smart MCS"
                 Clear(TotalAmountG);
                 Clear(TotalWHTAmountG);
                 GenJournalLineG.Reset;
-                GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
-                GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
-                GenJournalLineG.SetRange("Journal Batch Name", Name);
+                GenJournalLineG.CopyFilters("Gen. Journal Line");
+                // GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
+                // GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
+                // GenJournalLineG.SetRange("Journal Batch Name", Name);
                 if GenJournalLineG.FindSet then begin
                     BankAccountG.Get(GenJournalLineG."Bal. Account No."); // Kbank !
                     PostingDate := GenJournalLineG."Posting Date";
