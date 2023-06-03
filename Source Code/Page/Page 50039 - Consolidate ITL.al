@@ -113,13 +113,17 @@ page 50039 "Consolidate Item ledger Entry"
             ProgressBar.OpenCopyCountMax('Consolidate Item Ledger Entry', CompanyRec.Count);
         If CompanyRec.FindSet() then
             repeat
-                ItmeLedgerEntryG.ChangeCompany(CompanyRec.CurrentCompany);
+                // message(CompanyRec.Name);
+                ItmeLedgerEntryG.Reset();
+                ItmeLedgerEntryG.ChangeCompany(CompanyRec.Name);
+                ItmeLedgerEntryG.setrange("Entry Type",ItmeLedgerEntryG."Entry Type"::Sale);
                 ItmeLedgerEntryG.SetAutoCalcFields("Shortcut Dimension 3 Code",
                                                     "Shortcut Dimension 4 Code",
                                                     "Shortcut Dimension 5 Code",
                                                     "Shortcut Dimension 6 Code",
                                                     "Shortcut Dimension 7 Code",
                                                     "Shortcut Dimension 8 Code");
+           
                 if ItmeLedgerEntryG.FindSet() then
                     repeat
                         ConsolItemLedgerG.TransferFields(ItmeLedgerEntryG);

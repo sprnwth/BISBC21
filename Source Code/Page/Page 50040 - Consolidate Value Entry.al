@@ -121,7 +121,9 @@ page 50040 "Consolidate Value Entry"
             ProgressBar.OpenCopyCountMax('Consolidate Value Entry', CompanyRec.Count);
         If CompanyRec.FindSet() then
             repeat
-                ValueEntryG.ChangeCompany(CompanyRec.CurrentCompany);
+                ValueEntryG.Reset();
+                ValueEntryG.ChangeCompany(CompanyRec.Name);
+                ValueEntryG.setrange("Item Ledger Entry Type",ValueEntryG."Item Ledger Entry Type"::Sale);
                 ValueEntryG.SetAutoCalcFields("Shortcut Dimension 3 Code",
                                                 "Shortcut Dimension 4 Code",
                                                 "Shortcut Dimension 5 Code",

@@ -2669,6 +2669,9 @@ End Function
         <Field Name="SalesArea">
           <DataField>SalesArea</DataField>
         </Field>
+        <Field Name="Entry_No_">
+          <DataField>Entry_No_</DataField>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource</DataSourceName>

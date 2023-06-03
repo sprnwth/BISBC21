@@ -105,22 +105,22 @@ page 50041 "Consolidate Purchase Lines"
         dt: DataTransfer;
         ProgressBar: Codeunit "Progress Dialog";
     begin
-        ConsolPurchaseLinesG.Reset();
-        ConsolPurchaseLinesG.DeleteAll();
-        if ShowDialog then
-            ProgressBar.OpenCopyCountMax('Consolidate Purchase Lines', CompanyRec.Count);
-        If CompanyRec.FindSet() then
-            repeat
-                PurchasLinesG.ChangeCompany(CompanyRec.CurrentCompany);
-                if PurchasLinesG.FindSet() then
-                    repeat
-                        ConsolPurchaseLinesG.TransferFields(PurchasLinesG);
-                        ConsolPurchaseLinesG.CompanyName := CompanyRec.Name;
-                        ConsolPurchaseLinesG.Insert();
-                    until PurchasLinesG.Next() = 0;
-                if ShowDialog then
-                    ProgressBar.UpdateCopyCount();
-            until CompanyRec.Next() = 0;
+        // ConsolPurchaseLinesG.Reset();
+        // ConsolPurchaseLinesG.DeleteAll();
+        // if ShowDialog then
+        //     ProgressBar.OpenCopyCountMax('Consolidate Purchase Lines', CompanyRec.Count);
+        // If CompanyRec.FindSet() then
+        //     repeat
+        //         PurchasLinesG.ChangeCompany(CompanyRec.CurrentCompany);
+        //         if PurchasLinesG.FindSet() then
+        //             repeat
+        //                 ConsolPurchaseLinesG.TransferFields(PurchasLinesG);
+        //                 ConsolPurchaseLinesG.CompanyName := CompanyRec.Name;
+        //                 ConsolPurchaseLinesG.Insert();
+        //             until PurchasLinesG.Next() = 0;
+        //         if ShowDialog then
+        //             ProgressBar.UpdateCopyCount();
+        //     until CompanyRec.Next() = 0;
     end;
 
 }
