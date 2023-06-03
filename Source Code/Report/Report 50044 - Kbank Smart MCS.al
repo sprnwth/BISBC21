@@ -13,7 +13,7 @@ report 50044 "Kbank Smart MCS"
             {
                 DataItemLink = "Journal Template Name" = FIELD("Journal Template Name"), "Journal Batch Name" = FIELD(Name);
                 DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Line No.") ORDER(Ascending);
-
+                RequestFilterFields = "Document No.";
                 dataitem("NWTH Apply WHT Entry"; "NWTH Apply WHT Entry")
                 {
                     DataItemLink = "Original Document No." = FIELD("Document No."), "Bill-to/Pay-to No." = FIELD("Account No.");
@@ -213,7 +213,10 @@ report 50044 "Kbank Smart MCS"
                                     STSWHTFormIdG := '03';
                             end;
                         PersonalIdG := VendorG."VAT Registration No.";
-                        CompanyTaxIdG := Vendorg."VAT Registration No.";
+                        If VendorG."NWTH WHT Bus. Posting Group" <> '' then
+                            CompanyTaxIdG := Vendorg."VAT Registration No."
+                        else
+                            CompanyTaxIdG := '';
                         TaxIdG := VendorG."VAT Registration No.";
 
                         TaxIdG := DelChr(TaxIdG, '=', '-');
@@ -285,9 +288,10 @@ report 50044 "Kbank Smart MCS"
                 Clear(TotalAmountG);
                 Clear(TotalWHTAmountG);
                 GenJournalLineG.Reset;
-                GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
-                GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
-                GenJournalLineG.SetRange("Journal Batch Name", Name);
+                GenJournalLineG.CopyFilters("Gen. Journal Line");
+                // GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
+                // GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
+                // GenJournalLineG.SetRange("Journal Batch Name", Name);
                 if GenJournalLineG.FindSet then begin
                     BankAccountG.Get(GenJournalLineG."Bal. Account No."); // Kbank !
                     PostingDate := GenJournalLineG."Posting Date";
@@ -497,7 +501,7 @@ report 50044 "Kbank Smart MCS"
         /*12*/      PadStr(VendorBankAccountG."Bank Branch No.", 4, ' '),
         /*13*/      PadStr(VendorBankAccountG."Transit No.", 3, ' '),
         /*14*/      PadStr('', 255, ' '),
-        /*15*/      PadStr('', 10, ' '), //Old 10 Change to 10 again
+        /*15*/      PadStr(CompanyTaxIdG, 10, ' '), //Old 10 Change to 10 again
         /*16*/      PadStr('', 50, ' '),
         /*17*/      PadStr(Format("Gen. Journal Line"."Advice Mode"), 1, ' '),
         /*18*/      PadStr(VendorBankAccountFaxNoG, 50, ' '),

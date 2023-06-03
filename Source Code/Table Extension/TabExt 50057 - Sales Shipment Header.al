@@ -21,6 +21,12 @@ tableextension 50057 SalesShipmentHeaderExt extends "Sales Shipment Header"
             CalcFormula = exist("Sales Shipment Line" where("Document No." = field("No."),
                             Type = Const(Item), "Quantity Invoiced" = filter(1 ..)));
         }
+        // field(50003; "Vendor No."; Text[100])
+        // {
+        //     FieldClass = FlowField;
+        //     CalcFormula = lookup()
+
+        // }
     }
 
     var

@@ -14,6 +14,10 @@ report 50035 "BIS Receipt Tax Invoice (P)"
             column(ReportCaption; ReportCaptionG)
             {
             }
+            column(SaleSetup_ISO; SaleSetup."ISO for SI")
+            {
+
+            }
             column(CurrCode; CurrCode)
             {
             }
@@ -565,7 +569,12 @@ report 50035 "BIS Receipt Tax Invoice (P)"
                     else
                         BranchTextMain := 'Branch ' + CustomerG."NWTH Branch Code" + '';
 
-                RefereanceWorkdesG := GetWorkDescription();
+                //RefereanceWorkdesG := GetWorkDescription();
+
+                SaleHDR.Reset();
+                SaleHDR.SetRange("No.", "Order No.");
+                If SaleHDR.FindFirst() then
+                    RefereanceWorkdesG := SaleHDR.GetWorkDescription();
 
                 RunNoG := 0;
                 IsCurrencyG := ("Currency Code" <> '');
@@ -781,6 +790,7 @@ report 50035 "BIS Receipt Tax Invoice (P)"
 
     trigger OnPreReport()
     begin
+        SaleSetup.Get();
         ReportCaptionG := ReportCaption1Txt;
         if ReportNameG = ReportNameG::"Copy Invoice" then
             ReportCaptionG := ReportCaption2Txt;
@@ -808,6 +818,7 @@ report 50035 "BIS Receipt Tax Invoice (P)"
     end;
 
     var
+        SaleSetup: Record "Sales & Receivables Setup";
         LocationName: Text;
         Location: Record Location;
         Saleshipment: Record "Sales Shipment Header";
@@ -911,6 +922,7 @@ report 50035 "BIS Receipt Tax Invoice (P)"
         Picture64: Text;        // Add new barcode 2023-05-29
         ResponseText: Text;     // Add new barcode 2023-05-29
         CR: Text[2];
+        SaleHDR: Record "Sales Header";
 }
 
 

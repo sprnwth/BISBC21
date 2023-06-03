@@ -320,9 +320,10 @@ report 50020 "Kbank Export DTC"
                 Clear(TotalAmountG);
                 Clear(TotalWHTAmountG);
                 GenJournalLineG.Reset;
-                GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
-                GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
-                GenJournalLineG.SetRange("Journal Batch Name", Name);
+                GenJournalLineG.CopyFilters("Gen. Journal Line");
+                // GenJournalLineG.SetCurrentKey("Journal Template Name", "Journal Batch Name", "Line No.");
+                // GenJournalLineG.SetRange("Journal Template Name", "Journal Template Name");
+                // GenJournalLineG.SetRange("Journal Batch Name", Name);
                 if GenJournalLineG.FindSet then begin
                     BankAccountG.Get(GenJournalLineG."Bal. Account No."); // Kbank !
                     PostingDate := GenJournalLineG."Posting Date";
@@ -365,7 +366,7 @@ report 50020 "Kbank Export DTC"
 
 
 
-                Message('%1', "Gen. Journal Line"."Document No.");
+
                 TotalCreditTermsCountG := GenJournalLine2G.Count;
                 ExtensionFileNameG := 'txt';
 

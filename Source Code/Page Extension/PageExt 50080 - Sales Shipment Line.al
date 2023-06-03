@@ -1,4 +1,4 @@
-pageextension 50077 PageExtPost extends "Sales Shipment Lines"
+pageextension 50080 PageExtPostshipline extends "Posted Sales Shpt. Subform"
 {
     layout
     {
