@@ -15,6 +15,10 @@ tableextension 50019 SalesSetupBISExt extends "Sales & Receivables Setup"
         {
             DataClassification = ToBeClassified;
         }
+        field(50003; "ISO for SI"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var

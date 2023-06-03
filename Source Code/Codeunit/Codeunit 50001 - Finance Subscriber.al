@@ -241,36 +241,46 @@ codeunit 50001 FinanceCodeunit
         GenJournalBatchL.setrange("Journal Template Name", GenJnlTemplate);
         GenJournalBatchL.setrange(Name, GenJnlBatch);
         GenJournalBatchL.findfirst;
+
+        GenJournalLine.Reset();
+        GenJournalLine.setrange("Journal Template Name", GenJnlTemplate);
+        GenJournalLine.setrange("Journal Batch Name", GenJnlBatch);
         GenJournalBatchL.TestField("Ebanking Type");
         case GenJournalBatchL."Ebanking Type" of
             GenJournalBatchL."Ebanking Type"::DCT:
                 begin
                     KbankDTC.SetTableView(GenJournalBatchL);
+                    KbankDTC.SetTableView(GenJournalLine);
                     KbankDTC.Run();
                 end;
             GenJournalBatchL."Ebanking Type"::FTL:
                 begin
                     KbankFTL.SetTableView(GenJournalBatchL);
+                    KbankDTC.SetTableView(GenJournalLine);
                     KbankFTL.Run();
                 end;
             GenJournalBatchL."Ebanking Type"::FTR:
                 begin
                     KbankFTR.SetTableView(GenJournalBatchL);
+                    KbankDTC.SetTableView(GenJournalLine);
                     KbankFTR.Run();
                 end;
             GenJournalBatchL."Ebanking Type"::PCT:
                 begin
                     KbankPCT.SetTableView(GenJournalBatchL);
+                    KbankDTC.SetTableView(GenJournalLine);
                     KbankPCT.Run();
                 end;
             GenJournalBatchL."Ebanking Type"::MCL:
                 begin
                     KbankMCL.SetTableView(GenJournalBatchL);
+                    KbankDTC.SetTableView(GenJournalLine);
                     KbankMCL.Run();
                 end;
             GenJournalBatchL."Ebanking Type"::MCS:
                 begin
                     KbankMCS.SetTableView(GenJournalBatchL);
+                    KbankDTC.SetTableView(GenJournalLine);
                     KbankMCS.Run();
                 end;
 
