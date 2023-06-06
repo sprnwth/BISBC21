@@ -696,6 +696,65 @@ codeunit 50000 "BIS Main Function"
 
     end;
 
+    /// <summary>
+    /// subscriber for assign gen prod. from sales shipment 
+    /// when perform item charge assignment
+    /// </summary>
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Charge Assgnt. (Sales)", 'OnBeforeInsertItemChargeAssgntWithAssignValues', '', true, true)]
+    local procedure OnBeforeInsertItemChargeAssgntWithAssignValuesS(FromItemChargeAssgntSales: Record "Item Charge Assignment (Sales)"; var ItemChargeAssgntSales: Record "Item Charge Assignment (Sales)")
+    var
+        SalesSetup: Record "Sales & Receivables Setup";
+        SalesLine: Record "Sales Line";
+        SalesShipmentLine: Record "Sales Shipment Line";
+    begin
+        SalesSetup.Get();
+        if Not SalesSetup."Copy Ship. to Item Charge" then
+            exit;
+        //get salesshipmentline from itemchargeassgnt
+        if SalesShipmentLine.Get(ItemChargeAssgntSales."Applies-to Doc. No.",
+                                ItemChargeAssgntSales."Applies-to Doc. Line No.") then begin
+            //get salesline from itemchargeassgnt
+            if SalesLine.Get(ItemChargeAssgntSales."Document Type",
+                            ItemChargeAssgntSales."Document No.",
+                             ItemChargeAssgntSales."Document Line No.") then begin
+
+                SalesLine."Gen. Prod. Posting Group" := SalesShipmentLine."Gen. Prod. Posting Group";
+                SalesLine.Description := SalesShipmentLine.Description;
+                SalesLine.Modify();
+            end;
+
+        end;
+    end;
+
+    /// <summary>
+    /// subscriber for assign gen prod. from Purchase Receipt
+    /// when perform item charge assignment
+    /// </summary>
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Charge Assgnt. (Purch.)", 'OnBeforeInsertItemChargeAssgntWithAssignValues', '', true, true)]
+    local procedure OnBeforeInsertItemChargeAssgntWithAssignValuesP(FromItemChargeAssgntPurch: Record "Item Charge Assignment (Purch)"; var ItemChargeAssgntPurch: Record "Item Charge Assignment (Purch)")
+    var
+        SalesSetup: Record "Sales & Receivables Setup";
+        PurchLine: Record "Purchase Line";
+        PurchRcptLine: Record "Purch. Rcpt. Line";
+    begin
+        SalesSetup.Get();
+        if Not SalesSetup."Copy Ship. to Item Charge" then
+            exit;
+        //get salesshipmentline from itemchargeassgnt
+        if PurchRcptLine.Get(ItemChargeAssgntPurch."Applies-to Doc. No.",
+                                ItemChargeAssgntPurch."Applies-to Doc. Line No.") then begin
+            //get salesline from itemchargeassgnt
+            if PurchLine.Get(ItemChargeAssgntPurch."Document Type",
+                            ItemChargeAssgntPurch."Document No.",
+                             ItemChargeAssgntPurch."Document Line No.") then begin
+
+                PurchLine."Gen. Prod. Posting Group" := PurchRcptLine."Gen. Prod. Posting Group";
+                PurchLine.Description := PurchRcptLine.Description;
+                PurchLine.Modify();
+            end;
+
+        end;
+    end;
 
 
     var
